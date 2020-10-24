@@ -1,0 +1,11 @@
+#include "CS101Master.h"
+
+CS101Master::CS101Master(QObject *parent)
+    : QGenericPlugin(parent)
+{
+}
+
+QObject *CS101Master::create(const QString &name, const QString &spec)
+{
+    //static_assert(false, "You need to implement this function");
+}

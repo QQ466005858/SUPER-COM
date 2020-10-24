@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SUPER-COM info="采集转发" date_time="2020-07-23 10:37:00" version="0.0.1">
+	<PhyDevList>
+		<PhyDev type="PhyDev" port="SerialPort,COM1,9600,N,8,1" addr="1" id="0001" bOnline="false" name="LTU无线" DeviceLibrary="DeviceModbusRtuMaster" res_time="2000">
+			<ReadList>
+				<ReadRegList type="HoldReg" mode="r" reg_start="0x14" reg_end="0x16" group_name="时间" read_flag="true" reg_num="3" block_read="true"  poll_wait="1000">
+					<Reg reg_addr="0x14" name="A 相电压" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000001" record="false"/>
+					<Reg reg_addr="0x15" name="B 相电压" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000002" record="false"/>
+					<Reg reg_addr="0x16" name="C 相电压" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000003" record="false"/>
+				</ReadRegList>
+				<ReadRegList type="HoldReg" mode="r" reg_start="0x00" reg_end="0x04" group_name="设备参数" read_flag="true" reg_num="5" block_read="true" poll_wait="1000">
+					<Reg reg_addr="0x00" name="通信地址" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000009" record="false"/>
+					<Reg reg_addr="0x01" name="波特率" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"   id="00000010" record="false"/>
+					<Reg reg_addr="0x02" name="扩频因子" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000011" record="false"/>
+					<Reg reg_addr="0x03" name="信道" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"     id="00000012" record="false"/>
+					<Reg reg_addr="0x04" name="串口参数" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000013" record="false"/>
+				</ReadRegList>
+			</ReadList>
+			<WriteList>
+				<WriteRegList type="HoldReg" mode="w" reg_start="0x00" reg_end="0x04" group_name="设备参数" read_flag="true" reg_num="5" block_write="true" >
+					<Reg reg_addr="0x00" name="通信地址" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000004" record="false"/>
+					<Reg reg_addr="0x01" name="波特率" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"   id="00000005" record="false"/>
+					<Reg reg_addr="0x02" name="扩频因子" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000006" record="false"/>
+					<Reg reg_addr="0x03" name="信道" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"     id="00000007" record="false"/>
+					<Reg reg_addr="0x04" name="串口参数" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="00000008" record="false"/>
+				</WriteRegList>
+			</WriteList>
+		</PhyDev>
+		
+		<PhyDev port="SerialPort,COM2,9600,E,8,1" addr="1" id="0002" bOnline="false" name="电表" DeviceLibrary="DeviceDL645Client" res_time="2000">
+			<ReadList>
+				<ReadRegList type="HoldReg" mode="r" reg_start="0x14" reg_end="0x16" group_name="时间" read_flag="true" reg_num="3" block_read="false" poll_wait="1000">
+					<Reg reg_addr = "02010100" name = "A相电压" unit="V" 	data_type="unsigned" dis_type="float" mult_val="0.1" dec_bit ="1" type="" size="2"       id="000000014" />
+					<Reg reg_addr = "02010200" name = "B相电压" unit="V" 	data_type="unsigned" dis_type="float" mult_val="0.1" dec_bit ="1" type="" size="2"       id="000000015"/>
+					<Reg reg_addr = "02010300" name = "C相电压" unit="V" 	data_type="unsigned" dis_type="float" mult_val="0.1" dec_bit ="1" type="" size="2"       id="000000016"/>
+					<Reg reg_addr = "0201FF00" name = "电压数据块" unit="V" data_type="unsigned" dis_type="float" mult_val="0.1" dec_bit ="1" type="block" size="2"  id="000000017"/>
+				</ReadRegList>
+			</ReadList>
+			<WriteList>
+				<WriteRegList type="HoldReg" mode="w" reg_start="0x00" reg_end="0x04" group_name="设备参数" read_flag="true" reg_num="5" block_write="false">
+					<Reg reg_addr="04000102" name="时间" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"  record="false" id="000000018"/>
+				</WriteRegList>
+			</WriteList>
+		</PhyDev>
+	</PhyDevList>
+	
+	<VirDevList>
+	
+		<VirDev type="VirDev" port="NetPort,localhost,8000" addr="1" id="0003" bOnline="false" name="转发" DeviceLibrary="DeviceModbusRtuClient">
+			<ReadList>
+				<ReadRegList type="HoldReg" mode="r" reg_start="0x00" reg_end="0x0A" group_name="时间" read_flag="true" reg_num="3">
+					<Reg reg_addr="0x00" name="A 相电压" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000019" related_id="00000001" record="false" block_index=""/>
+					<Reg reg_addr="0x01" name="B 相电压" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000020" related_id="00000002" record="false" block_index=""/>
+					<Reg reg_addr="0x02" name="C 相电压" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000021" related_id="00000003" record="false" block_index=""/>
+					<Reg reg_addr="0x03" name="通信地址" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000022" related_id="00000009" record="false" block_index=""/>
+					<Reg reg_addr="0x04" name="波特率" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"   id="000000023" related_id="00000010" record="false" block_index=""/>
+					<Reg reg_addr="0x05" name="扩频因子" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000024" related_id="00000011" record="false" block_index=""/>
+					<Reg reg_addr="0x06" name="信道" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"     id="000000025" related_id="00000012" record="false" block_index=""/>
+					<Reg reg_addr="0x07" name="串口参数" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000026" related_id="00000013" record="false" block_index=""/>
+					<Reg reg_addr="0x08" name = "A相电压" unit="V" 	data_type="unsigned" dis_type="float" mult_val="0.1" dec_bit ="1" id="000000027" related_id="000000017" type="" size="2"block_index="2"/>
+					<Reg reg_addr="0x09" name = "B相电压" unit="V" 	data_type="unsigned" dis_type="float" mult_val="0.1" dec_bit ="1" id="000000028" related_id="000000017" type="" size="2"block_index="1"/>
+					<Reg reg_addr="0x0A" name = "C相电压" unit="V" 	data_type="unsigned" dis_type="float" mult_val="0.1" dec_bit ="1" id="000000029" related_id="000000017" type="" size="2"block_index="0"/>
+				</ReadRegList>
+			</ReadList>
+			<WriteList>
+				<WriteRegList type="HoldReg" mode="w" reg_start="0x00" reg_end="0x04" group_name="设备参数" read_flag="true" reg_num="5">
+					<Reg reg_addr="0x00" name="通信地址" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000030" related_id="00000004" record="false" block_index=""/>
+					<Reg reg_addr="0x01" name="波特率" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"   id="000000031" related_id="00000005" record="false" block_index=""/>
+					<Reg reg_addr="0x02" name="扩频因子" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000032" related_id="00000006" record="false" block_index=""/>
+					<Reg reg_addr="0x03" name="信道" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1"     id="000000033" related_id="00000007" record="false" block_index=""/>
+					<Reg reg_addr="0x04" name="串口参数" unit="V" reg_type="ushort" dis_type="float" mult_val="0.1" dec_bit="1" id="000000034" related_id="00000008" record="false" block_index=""/>
+				</WriteRegList>
+			</WriteList>
+		</VirDev>
+	</VirDevList>
+</SUPER-COM>

@@ -1,0 +1,10 @@
+release/ComConfig.o
+release/ComShareMemory.o
+release/DeviceModel.o
+release/modbus.o
+release/modbus-data.o
+release/modbus-rtu.o
+release/modbus-tcp.o
+release/ModBusRtuClient.o
+release/moc_DeviceModel.o
+release/moc_ModBusRtuClient.o

@@ -1,0 +1,11 @@
+#include "ModbusTcpMaster.h"
+
+ModbusTcpMaster::ModbusTcpMaster(QObject *parent)
+    : QGenericPlugin(parent)
+{
+}
+
+QObject *ModbusTcpMaster::create(const QString &name, const QString &spec)
+{
+    //static_assert(false, "You need to implement this function");
+}
